@@ -1,6 +1,3 @@
-import doctest
-
-
 """
 tut maje buty posylannia
 """
@@ -189,5 +186,3 @@ def check_skyscrapers(input_path: str):
 
 if __name__ == "__main__":
     print(check_skyscrapers("check.txt"))
-
-doctest.testmod()
