@@ -1,6 +1,8 @@
 """
-tut maje buty posylannia
+https://github.com/hooloobooroodkoo/Skyscrapers
 """
+
+
 def read_input(path: str):
     """
     Read game board file from path.
@@ -14,7 +16,7 @@ def read_input(path: str):
     return lst
 
 
-def delete_stars(row):
+def delete_stars(row: str):
     """
     This function deletes stars from the row.
     >>> delete_stars('*1234**')
@@ -42,10 +44,10 @@ def left_to_right_check(input_line: str, pivot: int):
     """
     input_line = delete_stars(input_line)
     visible_skyscrapers = 0
-    maximus = 0
+    max_floor = 0
     for i in range(1, len(input_line)):
-        if maximus < int(input_line[i]):
-            maximus = int(input_line[i])
+        if max_floor < int(input_line[i]):
+            max_floor = int(input_line[i])
             visible_skyscrapers += 1
     return visible_skyscrapers == pivot
 
@@ -94,12 +96,12 @@ def check_uniqueness_in_rows(board: list):
         if row[0] != '*':
             row_1 = delete_stars(row)
             for element in row_1[1:]:
-                if row_1[1:].count(element) >  1:
+                if row_1[1:].count(element) > 1:
                     return False
         if row[-1] != '*':
             row_1 = delete_stars(row)
             for element in row_1[:-1]:
-                if row_1[:-1].count(element) >  1:
+                if row_1[:-1].count(element) > 1:
                     return False
     return True
 
@@ -163,7 +165,7 @@ def check_columns(board: list):
     for i in range(1, len(new_board)):
         for j in new_board[i]:
             if j != '*':
-                if new_board[i][1:-1].count(j) > 1 :
+                if new_board[i][1:-1].count(j) > 1:
                     return False
     return check_horizontal_visibility(new_board)
 
@@ -175,11 +177,9 @@ def check_skyscrapers(input_path: str):
     False otherwise.
     """
     board = read_input(input_path)
-    if check_not_finished_board(board) is False:
-        return False
-    if check_horizontal_visibility(board) is False:
-        return False
-    if check_columns(board) is False:
+    if not check_not_finished_board(board) or\
+       not check_horizontal_visibility(board) or\
+       not check_columns(board):
         return False
     return True
 
